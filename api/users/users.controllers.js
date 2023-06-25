@@ -1,9 +1,9 @@
-const User = require("../../models/User"); //ok
-const bcrypt = require("bcrypt"); // ok
-const jwt = require("jsonwebtoken"); //ok
-const dotenv = require("dotenv");
-dotenv.config();
-//require("dotenv").config();  - this can combine the above dotenv lines
+const User = require("../../models/User");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv"); // 1
+dotenv.config(); // 2
+//require("dotenv").config();  - this can combine the above dotenv lines 1 + 2
 
 //https://www.npmjs.com/package/jsonwebtoken
 //jwt.sign(payload, secretOrPrivateKey, [options, callback])
@@ -18,14 +18,19 @@ const generateToken = (user) => {
     username: user.username,
     _id: user._id,
   };
+
+  // npm i jsonwebtoken
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
     expiresIn: process.env.EXPIRY,
   });
+  add;
   return token;
 };
 
 exports.signin = async (req, res, next) => {
   try {
+    const token = createToken(req.user);
+    return res.status(200).json({ token });
   } catch (err) {
     res.status(500).json("Server Error");
   }

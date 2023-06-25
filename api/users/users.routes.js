@@ -9,7 +9,7 @@ router.post("/signup", signup); //ok
 router.post(
   "/signin",
   signin,
-  passport.authenticate("local", { session: false })
+  passport.authenticate("local", { session: false }) //local is coming from local-strategy
 );
 router.get("/users", getUsers);
 

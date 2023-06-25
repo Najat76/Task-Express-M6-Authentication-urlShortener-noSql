@@ -1,10 +1,10 @@
-const connectDb = require("./database"); //ok
-const express = require("express"); //ok
-const cors = require("cors"); //ok
-const morgan = require("morgan"); //ok
+const connectDb = require("./database");
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
 const urlRoutes = require("./api/urls/urls.routes");
 const userRoutes = require("./api/users/users.routes");
-const passport = require("passport"); //ok
+const passport = require("passport");
 const { localStrategy } = require("./middlewares/passport");
 
 connectDb();
