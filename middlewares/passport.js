@@ -1,8 +1,12 @@
-const { LocalStrategy } = require("passport-local").Strategy;
+const User = require("../models/User"); //ok
+const passport = require("passport"); //ok
+const { LocalStrategy } = require("passport-local").Strategy; //ok
+const bcrypt = require("bcrypt"); //ok
 const JwtStrategy = require("passport-jwt").Strategy;
 const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
-const user = require("../models/User");
+// ok
 const bcrypt = require("bcrypt");
+const config = require("../config/keys");
 
 const localStrategy = LocalStrategy(
   { usernmaeField: "username" },
@@ -23,7 +27,7 @@ const localStrategy = LocalStrategy(
       }
       return done(null, foundUser);
     } catch (error) {
-      done(error);
+      return done(error);
     }
   }
 );
@@ -32,13 +36,13 @@ const localStrategy = LocalStrategy(
 exports.jwtStrategy = new JwtStrategy(
   {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET,
+    secretOrKey: config.JWT_SECRET,
   },
 
   async (token, done) => {
     //if the token is expired or not by comparing the expiration date to the date right now.
     //If the token is expired, call done and pass it null and false
-    if (Date.now > process.env.EXPIRY) {
+    if (Date.now > config.JWT_TOKEN_EXP) {
       return done(null, false);
     }
     try {

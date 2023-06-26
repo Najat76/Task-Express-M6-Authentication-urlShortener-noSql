@@ -1,11 +1,12 @@
-const connectDb = require("./database");
-const express = require("express");
-const cors = require("cors");
-const morgan = require("morgan");
+const connectDb = require("./database"); //ok
+const express = require("express"); //ok
+const cors = require("cors"); //ok
+const morgan = require("morgan"); //ok
 const urlRoutes = require("./api/urls/urls.routes");
-const userRoutes = require("./api/users/users.routes");
-const passport = require("passport");
-const { localStrategy } = require("./middlewares/passport");
+const userRoutes = require("./api/users/users.routes"); //ok
+const passport = require("passport"); //ok
+const { localStrategy } = require("./middlewares/passport"); //ok
+const POrt = 8000;
 
 connectDb();
 const app = express();
@@ -37,3 +38,8 @@ app.use((err, req, res, next) => {
 app.listen(8000, () => {
   console.log("The application is running on localhost:8000");
 });
+
+//https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
+//https://www.geeksforgeeks.org/express-js-res-status-function/
+//https://www.tabnine.com/code/javascript/functions/passport-jwt/fromAuthHeaderAsBearerToken
+//https://www.passportjs.org/packages/passport-jwt/
