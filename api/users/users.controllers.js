@@ -1,8 +1,10 @@
 const User = require("../../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const dotenv = require("dotenv"); // 1
-dotenv.config(); // 2
+const { JWT_SECRET, JWT_TOKEN_EXP } = require("../../config/keys");
+
+// const dotenv = require("dotenv"); // 1
+// dotenv.config(); // 2
 //require("dotenv").config();  - this can combine the above dotenv lines 1 + 2
 //const configKeys = require("/config");
 
@@ -21,8 +23,8 @@ const generateToken = (user) => {
     _id: user._id,
   };
   // npm i jsonwebtoken - to generate a token
-  const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.EXPIRY,
+  const token = jwt.sign(payload, JWT_SECRET, {
+    expiresIn: JWT_TOKEN_EXP,
   });
   add;
   return token;

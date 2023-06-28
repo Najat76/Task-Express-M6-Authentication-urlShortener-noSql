@@ -1,14 +1,13 @@
-const User = require("../models/User"); //ok
-const passport = require("passport"); //ok
-const { LocalStrategy } = require("passport-local").Strategy; //ok
-const bcrypt = require("bcrypt"); //ok
+const User = require("../models/User");
+const passport = require("passport");
+const { LocalStrategy } = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
-// ok
-const bcrypt = require("bcrypt");
+
 const config = require("../config/keys");
 
-const localStrategy = LocalStrategy(
+exports.localStrategy = new LocalStrategy(
   { usernmaeField: "username" },
   async (username, password, done) => {
     try {
@@ -31,6 +30,7 @@ const localStrategy = LocalStrategy(
     }
   }
 );
+
 //https://www.passportjs.org/packages/
 
 exports.jwtStrategy = new JwtStrategy(

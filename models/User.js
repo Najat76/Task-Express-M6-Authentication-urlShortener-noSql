@@ -10,8 +10,8 @@ const UserSchema = new mongoose.Schema(
         ref: "Url",
       },
     ],
-  },
-  { timestamps: true }
+  }
+  // { timestamps: true }
 );
 
 module.exports = mongoose.model("User", UserSchema);
